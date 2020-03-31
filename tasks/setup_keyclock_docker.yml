@@ -5,7 +5,7 @@
 
 - name: Pull Keycloak Docker
   docker_image:
-    name: {{ keycloak_docker_image }}
+    name: "{{ keycloak_docker_image }}"
     source: pull
 
 - fail: msg="Bailing out. this play requires 'keycloak_admin_password'"

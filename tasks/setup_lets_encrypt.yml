@@ -15,7 +15,6 @@
             - domains:
               - "{{ keycloak_domain_name }}"
         when: letsencrypt_certbot_enabled
-      become: true
 
     - name: Check that the cert.pem exists
       stat:

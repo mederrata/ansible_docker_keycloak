@@ -4,12 +4,12 @@
 
 - name: Install Dependencies
   import_tasks: "{{ role_path }}/tasks/install_dependencies.yml"
-  become: true
+  become: yes
 
 - name: Setup Cert Bot
   import_tasks: "{{ role_path }}/tasks/setup_lets_encrypt.yml"
-  become: true
+  become: yes
 
 - name: Setup Nginx
   import_tasks: "{{ role_path }}/tasks/setup_nginx.yml"
-  become: true
+  become: yes

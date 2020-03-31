@@ -5,6 +5,10 @@
 
 - name: Create Nginx
   block:
+    - name: Whoami
+      command: 
+        cmd: whoami
+
     - name: Install Nginx
       include_role: 
         name: nginxinc.nginx
@@ -28,5 +32,4 @@
                 frontend:
                   location: /
                   proxy_pass: "https://{{ keycloak_domain_name }}:8080"
-
-
+        become: yes

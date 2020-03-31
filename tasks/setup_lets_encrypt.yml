@@ -40,8 +40,8 @@
             path: "/etc/ssl/nginx/"
             state: directory
             mode: 0770
-            owner: "{{ root }}"
-            group: "{{ root }}"
+            owner: "root"
+            group: "root"
 
         - name: Symlink SSL Certificate
           file:

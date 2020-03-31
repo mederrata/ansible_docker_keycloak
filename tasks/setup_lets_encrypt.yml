@@ -15,6 +15,7 @@
             - domains:
               - "{{ keycloak_domain_name }}"
         when: letsencrypt_certbot_enabled
+      become: true
 
     - name: Check that the cert.pem exists
       stat:
@@ -32,3 +33,27 @@
         keycloak_tls_cert: "/etc/letsencrypt/live/{{ keycloak_domain_name }}/cert.pem"
         keycloak_tls_key: "/etc/letsencrypt/live/{{ keycloak_domain_name }}/privkey.pem"
       when: privkey_stat_result.stat.exists == true and cert_stat_result.stat.exists
+      
+    - name: Symbolic Link SSL Certificates
+      block:
+        - name: Ensure Ngnix Path Exists
+          file:
+            path: "/etc/ssl/nginx/"
+            state: directory
+            mode: 0770
+            owner: "{{ root }}"
+            group: "{{ root }}"
+
+        - name: Symlink SSL Certificate
+          file:
+            src: "{{ keycloak_tls_cert }}"
+            dst: "/etc/ssl/nginx/nginx-repo.crt"
+            state: link
+
+        - name: Symlink SSL Keys
+          file:
+            src: "{{ keycloak_tls_key }}"
+            dst: "/etc/ssl/nginx/nginx-repo.key"
+            state: link
+      when: privkey_stat_result.stat.exists == true and cert_stat_result.stat.exists
+      

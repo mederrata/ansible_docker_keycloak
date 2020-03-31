@@ -29,16 +29,4 @@
                   location: /
                   proxy_pass: "https://{{ keycloak_domain_name }}:8080"
 
-- name: Symbolic Link SSL Certificates
-  block:
-    - name: Symlink SSL Certificate
-      file:
-        src: "{{ keycloak_tls_cert }}"
-        dst: "/etc/ssl/nginx/nginx-repo.crt"
-        state: link
 
-    - name: Symlink SSL Keys
-      file:
-        src: "{{ keycloak_tls_key }}"
-        dst: "/etc/ssl/nginx/nginx-repo.key"
-        state: link

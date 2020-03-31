@@ -12,6 +12,7 @@
   yum: 
     name: ['cronie', "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"]
     state: present
+  when: ansible_os_family == 'RedHat'
 
 - name: Install cron (Debian).
   apt: 

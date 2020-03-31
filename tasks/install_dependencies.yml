@@ -34,7 +34,7 @@
             state: present
         - name: Install Docker Repository (Ubuntu)
           apt_repository:
-            repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+            repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
             state: present
       when: ansible_distribution == 'Ubuntu'
       #https://docs.docker.com/install/linux/docker-ce/ubuntu/
@@ -47,7 +47,7 @@
             state: present
         - name: Install Docker Repository (Debian)
           apt_repository:
-            repo: deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable
+            repo: "deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"
             state: present
       when: ansible_distribution == 'Debian'
       #https://docs.docker.com/install/linux/docker-ce/debian/

@@ -10,16 +10,16 @@
       vars:
         template_file: http/default.conf.j2
         conf_file_name: default.conf
-        conf_file_location: {{ nginx_default_config_directory }}
+        conf_file_location: "{{ nginx_default_config_directory }}"
         servers:
           server1:
             listen:
               listen_localhost:
                 # ip: 0.0.0.0
-                port: {{ keycloak_https_bind_port }}
+                port: "{{ keycloak_https_bind_port }}"
                 opts:
                   - default_server
-            server_name: {{ keycloak_domain_name }}
+            server_name: "{{ keycloak_domain_name }}"
             error_page: /usr/share/nginx/html
             autoindex: false
             reverse_proxy:
@@ -32,12 +32,12 @@
   block:
     - name: Symlink SSL Certificate
       file:
-        src: {{ keycloak_tls_cert }}
+        src: "{{ keycloak_tls_cert }}"
         dst: "/etc/ssl/nginx/nginx-repo.crt"
         state: link
 
     - name: Symlink SSL Keys
       file:
-        src: {{ keycloak_tls_key }}
+        src: "{{ keycloak_tls_key }}"
         dst: "/etc/ssl/nginx/nginx-repo.key"
         state: link

@@ -1,0 +1,13 @@
+---
+# defaults file for ansible-docker-keycloak
+
+
+keycloak_domain_name: ''
+keycloak_docker_image: jboss/keycloak
+keycloak_version: 9.0.2
+
+
+letsencrypt_certbot_admin_email: "example@example.com"
+letsencrypt_certbot_create_if_missing: true
+letsencrypt_certbot_create_standalone_stop_services: []
+nginx_default_config_directory: /etc/nginx/conf.d/

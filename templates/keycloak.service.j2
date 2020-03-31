@@ -1,0 +1,27 @@
+#jinja2: lstrip_blocks: "True"
+[Unit]
+Description=Key Cloak
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=simple
+ExecStartPre=-/usr/bin/docker kill keycloak
+ExecStartPre=-/usr/bin/docker rm keycloak
+
+ExecStart=/usr/bin/docker run --rm --name keycloak \
+			--log-driver=none \
+			-e KEYCLOAK_USER={{ keycloak_admin }} -e KEYCLOAK_PASSWORD={{ keycloak_admin_password }} \
+			{% for arg in keycloak_container_extra_arguments %}
+			{{ arg }} \
+			{% endfor %}
+			{{ keycloak_docker_image }}
+
+ExecStop=-/usr/bin/docker kill keycloak
+ExecStop=-/usr/bin/docker rm keycloak
+Restart=always
+RestartSec=30
+SyslogIdentifier=keycloak
+
+[Install]
+WantedBy=multi-user.target

@@ -2,10 +2,15 @@
 # defaults file for ansible-docker-keycloak
 
 
-keycloak_domain_name: ''
-keycloak_docker_image: jboss/keycloak
+keycloak_domain_name: 'example.com'
+keycloak_docker_image: jboss/keycloak:9.0.2
+keycloak_https_bind_port: 8443
 keycloak_version: 9.0.2
-
+keycloak_admin: admin
+keycloak_admin_password: ''
+keycloak_realm_name: ''
+keycloak_container_extra_arguments: []
+keycloak_systemd_path: "/etc/systemd/system"
 
 letsencrypt_certbot_admin_email: "example@example.com"
 letsencrypt_certbot_create_if_missing: true

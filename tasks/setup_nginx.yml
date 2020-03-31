@@ -16,7 +16,7 @@
             listen:
               listen_localhost:
                 # ip: 0.0.0.0
-                port: 8443
+                port: {{ keycloak_https_bind_port }}
                 opts:
                   - default_server
             server_name: {{ keycloak_domain_name }}
@@ -26,7 +26,7 @@
               locations:
                 frontend:
                   location: /
-                  proxy_pass: http://{{ keycloak_domain_name }}
+                  proxy_pass: "https://{{ keycloak_domain_name }}:8080"
 
 - name: Symbolic Link SSL Certificates
   block:

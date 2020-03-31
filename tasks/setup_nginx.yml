@@ -6,7 +6,8 @@
 - name: Create Nginx
   block:
     - name: Install Nginx
-      include_role: nginxinc.nginx
+      include_role: 
+        name: nginxinc.nginx
       vars:
         template_file: http/default.conf.j2
         conf_file_name: default.conf

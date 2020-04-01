@@ -60,7 +60,7 @@
 
     - name: Install Docker Package
       apt: 
-        name: ['docker-ce', 'docker-ce-cli', 'containerd.io']
+        name: ['docker-ce', 'docker-ce-cli', 'containerd.io', 'python-dockerpty']
         state: present
   when: ansible_os_family == 'Debian'
 

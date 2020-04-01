@@ -24,6 +24,6 @@
     daemon_reload: yes
   when: "keycloak_systemd_service_result.changed"
 
-- set_fact:
+- name: Add keycloak to the systemd service list
+  set_fact:
     keycloak_systemd_services_list: "{{ keycloak_systemd_services_list + ['keycloak'] }}"
-  when: keycloak_admin_password is defined

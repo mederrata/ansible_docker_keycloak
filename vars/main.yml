@@ -1,2 +1,4 @@
 ---
 # vars file for ansible-docker-keycloak
+
+keycloak_systemd_services_list: []

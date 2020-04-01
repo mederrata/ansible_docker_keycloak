@@ -18,13 +18,13 @@
   import_tasks: "{{ role_path }}/tasks/setup_keycloak_docker.yml"
   become: yes
 
-- name: Ensure Keycloak Stopped
+- name: Ensure Systemd Services Stopped
   systemd:
     name: "{{ item }}"
     state: stopped
   with_items: "{{ keycloak_systemd_services_list }}"
 
-- name: Ensure Keycloak Started
+- name: Ensure Systemd Services Started
   systemd:
     name: "{{ item }}"
     state: started

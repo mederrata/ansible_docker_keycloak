@@ -29,4 +29,4 @@
             listen_ssl: 8443
             ssl: true
             letsencrypt: true
-            letsencrypt_email: "ted@mederrata.com"
+            letsencrypt_email: "{{ letsencrypt_certbot_admin_email }}"

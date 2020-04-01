@@ -1,6 +1,0 @@
----
-
-- name: Ensure systemd reloaded
-  service:
-    daemon_reload: yes
-

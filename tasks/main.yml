@@ -6,10 +6,6 @@
   import_tasks: "{{ role_path }}/tasks/install_dependencies.yml"
   become: yes
 
-- name: Setup Cert Bot
-  import_tasks: "{{ role_path }}/tasks/setup_lets_encrypt.yml"
-  become: yes
-
 - name: Setup Nginx
   import_tasks: "{{ role_path }}/tasks/setup_nginx.yml"
   become: yes
@@ -23,6 +19,7 @@
     name: "{{ item }}"
     state: stopped
   with_items: "{{ keycloak_systemd_services_list }}"
+  become: true
 
 - name: Ensure Systemd Services Started
   systemd:
@@ -30,3 +27,4 @@
     state: started
     enabled: yes
   with_items: "{{ keycloak_systemd_services_list }}"
+  become: true

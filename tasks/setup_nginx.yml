@@ -3,36 +3,30 @@
 ##
 ##
 
-- name: Create Nginx
-  block:
-    - name: Whoami
-      command: 
-        cmd: whoami
 
-    - name: Install Nginx
+- name: Install Nginx
+  block:
+    - name: update apt cache
+      apt: update_cache=true cache_valid_time=600
+      changed_when: false
+      when: ansible_os_family == 'Debian'
+      
+    - name: Install Ngnix
       include_role: 
-        name: nginxinc.nginx
+        name: hispanico.nginx-revproxy
       vars:
-        nginx_http_template_enable: true
-        nginx_http_template:
+        nginx_revproxy_sites:
           default:
-            template_file: http/default.conf.j2
-            conf_file_name: default.conf
-            conf_file_location: "{{ nginx_default_config_directory }}"
-            servers:
-              server1:
-                listen:
-                  listen_localhost:
-                    ip: 0.0.0.0
-                    port: "{{ keycloak_https_bind_port }}"
-                    opts:
-                      - default_server
-                server_name: "localhost"
-                error_page: /usr/share/nginx/html
-                autoindex: false
-                reverse_proxy:
-                  locations:
-                    frontend:
-                      location: /
-                      proxy_pass: "https://localhost"
-        become: yes
+            ssl: false
+            letsencrypt: false
+
+          keycloak:
+            domains:
+              - "{{ keycloak_domain_name }}"
+            upstreams:
+              - { backend_address: localhost, backend_port: 8442 }
+            listen: 80
+            listen_ssl: 8443
+            ssl: true
+            letsencrypt: true
+            letsencrypt_email: "ted@mederrata.com"

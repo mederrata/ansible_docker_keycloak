@@ -16,4 +16,3 @@ letsencrypt_certbot_admin_email: "example@example.com"
 letsencrypt_certbot_create_if_missing: true
 letsencrypt_certbot_create_standalone_stop_services: []
 nginx_default_config_directory: /etc/nginx/conf.d/
-interpreter_python: auto

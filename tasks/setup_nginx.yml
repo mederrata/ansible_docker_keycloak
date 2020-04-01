@@ -33,3 +33,6 @@
                   location: /
                   proxy_pass: "https://{{ keycloak_domain_name }}:8080"
         become: yes
+  tags:
+    - setup-all
+    - setup-ngnix

@@ -3,13 +3,13 @@
 # https://hub.docker.com/r/jboss/keycloak/tags
 #
 
+- fail: msg="Bailing out. this play requires 'keycloak_admin_password'"
+  when: keycloak_admin_password is undefined
+
 - name: Pull Keycloak Docker
   docker_image:
     name: "{{ keycloak_docker_image }}"
     source: pull
-
-- fail: msg="Bailing out. this play requires 'keycloak_admin_password'"
-  when: keycloak_admin_password is undefined
 
 - name: Ensure keycloak.service installed
   template:
@@ -24,7 +24,6 @@
     daemon_reload: yes
   when: "keycloak_systemd_service_result.changed"
 
-
 - set_fact:
     keycloak_systemd_services_list: "{{ keycloak_systemd_services_list + ['keycloak'] }}"
-  when: keycloak_systemd_service_result.stat.exists
+  when: keycloak_admin_password is defined

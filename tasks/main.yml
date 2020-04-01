@@ -19,13 +19,14 @@
   become: yes
 
 - name: Ensure Keycloak Stopped
-  service:
+  systemd:
     name: "{{ item }}"
     state: stopped
-  when: "{{ keycloak_systemd_services_list }}"
+  with_items: "{{ keycloak_systemd_services_list }}"
 
 - name: Ensure Keycloak Started
-  service:
+  systemd:
     name: "{{ item }}"
     state: started
-  when: "{{ keycloak_systemd_services_list }}"
+    enabled: yes
+  with_items: "{{ keycloak_systemd_services_list }}"

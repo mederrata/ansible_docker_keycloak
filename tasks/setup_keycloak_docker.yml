@@ -18,7 +18,13 @@
     mode: 0644
   register: keycloak_systemd_service_result
 
+
 - name: Ensure systemd reloaded after keycloak.service installation
   service:
     daemon_reload: yes
   when: "keycloak_systemd_service_result.changed"
+
+
+- set_fact:
+    keycloak_systemd_services_list: "{{ keycloak_systemd_services_list + ['keycloak'] }}"
+  when: keycloak_systemd_service_result.stat.exists

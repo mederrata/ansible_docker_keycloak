@@ -5,6 +5,7 @@
 keycloak_domain_name: 'example.com'
 keycloak_docker_image: jboss/keycloak:9.0.2
 keycloak_https_bind_port: 8443
+keycloak_http_bind_port: 8080
 keycloak_version: 9.0.2
 keycloak_admin: admin
 keycloak_admin_password: ''

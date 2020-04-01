@@ -7,15 +7,9 @@
   docker_image:
     name: "{{ keycloak_docker_image }}"
     source: pull
-  tags:
-    - setup-all
-    - setup-docker
 
 - fail: msg="Bailing out. this play requires 'keycloak_admin_password'"
   when: keycloak_admin_password is undefined
-  tags:
-    - setup-all
-    - setup-docker
 
 - name: Ensure keycloak.service installed
   template:
@@ -23,23 +17,15 @@
     dest: "{{ keycloak_systemd_path }}/keycloak.service"
     mode: 0644
   register: keycloak_systemd_service_result
-  tags:
-    - setup-all
-    - setup-docker
 
 
 - name: Ensure systemd reloaded after keycloak.service installation
   service:
     daemon_reload: yes
   when: "keycloak_systemd_service_result.changed"
-  tags:
-    - setup-all
-    - setup-docker
 
 
 - name: Set systemd service list
   set_fact:
     keycloak_systemd_services_list: "{{ keycloak_systemd_services_list + ['keycloak'] }}"
-  tags:
-    - setup-all
-    - setup-docker
+  when: keycloak_systemd_service_result.stat.exists

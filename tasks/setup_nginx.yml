@@ -23,7 +23,7 @@
               server1:
                 listen:
                   listen_localhost:
-                    # ip: 0.0.0.0
+                    ip: 0.0.0.0
                     port: "{{ keycloak_https_bind_port }}"
                     opts:
                       - default_server

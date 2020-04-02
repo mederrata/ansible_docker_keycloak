@@ -5,14 +5,23 @@
 - name: Install Dependencies
   import_tasks: "{{ role_path }}/tasks/install_dependencies.yml"
   become: yes
+  tags:
+    - setup-all
+    - setup-keycloak
 
 - name: Setup Nginx
   import_tasks: "{{ role_path }}/tasks/setup_nginx.yml"
   become: yes
+  tags:
+    - setup-ngnix
+    - setup-all
 
 - name: Setup Docker
   import_tasks: "{{ role_path }}/tasks/setup_keycloak_docker.yml"
   become: yes
+  tags:
+    - setup-all
+    - setup-keycloak
 
 - name: Ensure Systemd Services Stopped
   systemd:
@@ -20,6 +29,9 @@
     state: stopped
   with_items: "{{ keycloak_systemd_services_list }}"
   become: true
+  tags:
+    - setup-all
+    - setup-keycloak
 
 - name: Ensure Systemd Services Started
   systemd:
@@ -28,3 +40,6 @@
     enabled: yes
   with_items: "{{ keycloak_systemd_services_list }}"
   become: true
+  tags:
+    - setup-all
+    - setup-keycloak

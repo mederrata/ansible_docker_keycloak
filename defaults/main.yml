@@ -12,6 +12,7 @@ keycloak_admin_password: ''
 keycloak_realm_name: ''
 keycloak_container_extra_arguments: []
 keycloak_systemd_path: "/etc/systemd/system"
+keycloak_realm_export_json: ""
 
 letsencrypt_certbot_admin_email: "example@example.com"
 letsencrypt_certbot_create_if_missing: true

@@ -11,6 +11,15 @@
     name: "{{ keycloak_docker_image }}"
     source: pull
 
+- name: Ensure Install Directory Exists
+  file: 
+    path: "{{ keycloak_install_directory }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0750'
+  
+
 - name: Ensure keycloak.service installed
   template:
     src: "{{ role_path }}/templates/keycloak.service.j2"
@@ -23,7 +32,3 @@
   service:
     daemon_reload: yes
   when: "keycloak_systemd_service_result.changed"
-
-- name: Add keycloak to the systemd service list
-  set_fact:
-    keycloak_systemd_services_list: "{{ keycloak_systemd_services_list + ['keycloak'] }}"

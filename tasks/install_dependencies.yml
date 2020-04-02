@@ -68,6 +68,6 @@
 
 - name: Add ngninx to the systemd service list
   set_fact:
-    keycloak_systemd_services_list: "{{ keycloak_systemd_services_list + ['ngninx'] }}"
+    keycloak_systemd_services_list: "{{ keycloak_systemd_services_list + ['nginx'] }}"
   tags:
     - always

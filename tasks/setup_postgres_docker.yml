@@ -23,8 +23,6 @@
   template:
     src: "{{ role_path }}/templates/postgres.service.j2"
     dest: "{{ keycloak_systemd_path }}/postgres.service"
-    owner: "{{ keycloak_user_uid }}"
-    group: "{{ keycloak_user_gid }}"
     mode: 0640
   register: postgres_systemd_service_result
   when: keycloak_postgres_enabled|bool

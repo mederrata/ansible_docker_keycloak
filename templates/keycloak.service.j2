@@ -12,12 +12,10 @@ ExecStartPre=-/usr/bin/docker rm keycloak
 ExecStart=/usr/bin/docker run --rm --name keycloak \
 			--log-driver=none \
 			-e KEYCLOAK_USER={{ keycloak_postgres_connection_username }} -e KEYCLOAK_PASSWORD={{ keycloak_postgres_connection_password }} \
-			--user={{ keycloak_user_uid }}:{{ keycloak_user_gid }} \
 			-e PROXY_ADDRESS_FORWARDING=true \
 			-p 8442:8080 \
 			-v /etc/letsencrypt/live/keycloak/cert.pem:/etc/x509/https/tls.crt:ro \
 			-v /etc/letsencrypt/live/keycloak/key.pem:/etc/x509/https/tls.key:ro \
-			-v /etc/passwd:/etc/passwd:ro \
 			{% if keycloak_postgres_enabled %}
 			--net {{ keycloak_docker_network }} \
 			-e DB_USER={{ keycloak_postgres_connection_username }} -e DB_PASSWORD={{ keycloak_postgres_connection_username }} \

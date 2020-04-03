@@ -28,11 +28,11 @@
   group:
     name: "{{ keycloak_user_username }}"
     gid: "{{ keycloak_user_gid }}"
-  state: present
+    state: present
 
 - name: Create keycloak user
   user:
     name: "{{ keycloak_user_username }}"
     uid: "{{ keycloak_user_uid }}"
     group: "{{ keycloak_user_gid }}"
-  state: present
+    state: present

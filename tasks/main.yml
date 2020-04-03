@@ -16,7 +16,7 @@
 - name: Ensure Systemd Services stopped
   systemd:
     name: "{{ item }}"
-    state: stop
+    state: stopped
     enabled: yes
   with_items: "{{ keycloak_systemd_services_list }}"
   become: true

@@ -1,0 +1,36 @@
+
+#jinja2: lstrip_blocks: "True"
+[Unit]
+Description=Postgres server
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=simple
+ExecStartPre=-/usr/bin/docker stop keycloak-postgres
+ExecStartPre=-/usr/bin/docker rm keycloak-postgres
+
+ExecStart=/usr/bin/docker run --rm --name keycloak-postgres \
+			--log-driver=none \
+			--tmpfs=/tmp:rw,noexec,nosuid,size=100m \
+			--network={{ keycloak_docker_network }} \
+			{% if keycloak_postgres_container_postgres_bind_port %}
+			-p {{ keycloak_postgres_container_postgres_bind_port }}:5432 \
+			{% endif %}
+			--env-file={{ keycloak_postgres_base_path }}/env-postgres-server \
+			-e PGDATA=/var/lib/postgresql/data/pgdata \
+			-v {{ keycloak_postgres_data_path }}:/var/lib/postgresql/data:rw \
+			-v /etc/passwd:/etc/passwd:ro \
+			{% for arg in keycloak_postgres_container_extra_arguments %}
+			{{ arg }} \
+			{% endfor %}
+			{{ keycloak_postgres_docker_image }}
+
+ExecStop=-/usr/bin/docker stop keycloak-postgres
+ExecStop=-/usr/bin/docker rm keycloak-postgres
+Restart=always
+RestartSec=30
+SyslogIdentifier=keycloak-postgres
+
+[Install]
+WantedBy=multi-user.target

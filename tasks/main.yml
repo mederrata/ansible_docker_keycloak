@@ -1,6 +1,10 @@
 ---
 # tasks file for ansible-docker-keycloak
-
+- name: init vars
+  import_tasks: "{{ role_path }}/tasks/init.yml"
+  become: yes
+  tags:
+    - always
 
 - name: Install Dependencies
   import_tasks: "{{ role_path }}/tasks/install_dependencies.yml"
@@ -22,6 +26,13 @@
   tags:
     - setup-all
     - setup-keycloak
+
+- name: Setup Docker
+  import_tasks: "{{ role_path }}/tasks/setup_postgres_docker.yml"
+  become: yes
+  tags:
+    - setup-all
+    - setup-postgres
   
 - name: Ensure No Nginx cache exists. Resolves Bad Gateway errors
   file:

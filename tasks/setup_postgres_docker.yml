@@ -41,7 +41,7 @@
   when: "postgres_systemd_service_result.changed"
 
 - name: Ensure postgres.service doesn't exist
-  template:
-    dest: "{{ keycloak_systemd_path }}/postgres.service"
+  file:
+    path: "{{ keycloak_systemd_path }}/postgres.service"
     state: absent
   when: not keycloak_postgres_enabled

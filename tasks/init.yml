@@ -13,6 +13,7 @@
 - name: Add postgres to the systemd service list
   set_fact:
     keycloak_systemd_services_list: "{{ keycloak_systemd_services_list + ['postgres'] }}"
+  when: keycloak_postgres_enabled
   tags:
     - always
 

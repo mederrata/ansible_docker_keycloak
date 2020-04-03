@@ -11,8 +11,8 @@
   file: 
     path: "{{ item }}"
     state: directory
-    owner: root
-    group: root
+    owner: "{{ keycloak_user_uid }}"
+    group: "{{ keycloak_user_gid }}"
     mode: '0750'
   with_items:
     - "{{ keycloak_postgres_base_path }}"
@@ -23,6 +23,8 @@
   template:
     src: "{{ role_path }}/templates/postgres.service.j2"
     dest: "{{ keycloak_systemd_path }}/postgres.service"
+    owner: "{{ keycloak_user_uid }}"
+    group: "{{ keycloak_user_gid }}"
     mode: 0644
   register: postgres_systemd_service_result
   when: keycloak_postgres_enabled|bool
@@ -31,6 +33,8 @@
   template:
     src: "{{ role_path }}/templates/env-postgres-psql.j2"
     dest: "{{ keycloak_postgres_base_path }}/env-postgres-psql"
+    owner: "{{ keycloak_user_uid }}"
+    group: "{{ keycloak_user_gid }}"
     mode: 0644
   register: postgres_systemd_service_result
   when: keycloak_postgres_enabled|bool

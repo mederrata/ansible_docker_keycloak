@@ -23,3 +23,7 @@
   when: keycloak_postgres_enabled
   tags:
     - always
+
+- name: Create keycloak user
+  user:
+    name: "{{ keycloak_user }}"

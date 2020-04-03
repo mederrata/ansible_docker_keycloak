@@ -15,8 +15,8 @@
   file: 
     path: "{{ keycloak_install_directory }}"
     state: directory
-    owner: root
-    group: root
+    owner: "{{ keycloak_user_uid }}"
+    group: "{{ keycloak_user_gid }}"
     mode: '0750'
   
 
@@ -24,6 +24,8 @@
   template:
     src: "{{ role_path }}/templates/keycloak.service.j2"
     dest: "{{ keycloak_systemd_path }}/keycloak.service"
+    owner: "{{ keycloak_user_uid }}"
+    group: "{{ keycloak_user_gid }}"
     mode: 0644
   register: keycloak_systemd_service_result
 

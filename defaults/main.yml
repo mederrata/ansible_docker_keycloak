@@ -15,6 +15,9 @@ keycloak_systemd_path: "/etc/systemd/system"
 keycloak_realm_export_json: ""
 keycloak_install_directory: "/keycloak"
 keycloak_docker_network: keycloak-network
+keycloak_user_username: keycloak
+keycloak_user_uid: 995
+keycloak_user_gid: 995
 
 keycloak_postgres_enabled: false
 keycloak_postgres_base_path: "{{ keycloak_install_directory }}/postgres"

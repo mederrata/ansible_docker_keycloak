@@ -13,7 +13,7 @@
     state: directory
     owner: "{{ keycloak_user_uid }}"
     group: "{{ keycloak_user_gid }}"
-    mode: '0750'
+    mode: 0700
   with_items:
     - "{{ keycloak_postgres_base_path }}"
     - "{{ keycloak_postgres_data_path }}"
@@ -25,7 +25,7 @@
     dest: "{{ keycloak_systemd_path }}/postgres.service"
     owner: "{{ keycloak_user_uid }}"
     group: "{{ keycloak_user_gid }}"
-    mode: 0644
+    mode: 0640
   register: postgres_systemd_service_result
   when: keycloak_postgres_enabled|bool
 
@@ -35,12 +35,12 @@
     dest: "{{ keycloak_postgres_base_path }}/env-postgres-psql"
     owner: "{{ keycloak_user_uid }}"
     group: "{{ keycloak_user_gid }}"
-    mode: 0644
+    mode: 0640
   register: postgres_systemd_service_result
   when: keycloak_postgres_enabled|bool
 
 - name: Ensure systemd reloaded after postgres.service installation
-  service:
+  systemd:
     daemon_reload: yes
   when: "postgres_systemd_service_result.changed"
 

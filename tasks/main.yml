@@ -13,6 +13,19 @@
     - setup-all
     - setup-keycloak
 
+- name: Ensure Systemd Services stopped
+  systemd:
+    name: "{{ item }}"
+    state: stop
+    enabled: yes
+  with_items: "{{ keycloak_systemd_services_list }}"
+  become: true
+  tags:
+    - setup-all
+    - setup-keycloak
+    - setup-postgres
+    - setup-nginx
+
 - name: Setup Nginx
   import_tasks: "{{ role_path }}/tasks/setup_nginx.yml"
   become: yes
@@ -41,7 +54,7 @@
   tags:
     - always
     
-- name: Ensure Systemd Services retarted
+- name: Ensure Systemd Services started
   systemd:
     name: "{{ item }}"
     state: started
@@ -51,4 +64,5 @@
   tags:
     - setup-all
     - setup-keycloak
+    - setup-postgres
     - setup-nginx

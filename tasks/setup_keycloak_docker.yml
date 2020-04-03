@@ -17,7 +17,7 @@
     state: directory
     owner: "{{ keycloak_user_uid }}"
     group: "{{ keycloak_user_gid }}"
-    mode: '0750'
+    mode: 0750
   
 
 - name: Ensure keycloak.service installed
@@ -26,11 +26,11 @@
     dest: "{{ keycloak_systemd_path }}/keycloak.service"
     owner: "{{ keycloak_user_uid }}"
     group: "{{ keycloak_user_gid }}"
-    mode: 0644
+    mode: 0640
   register: keycloak_systemd_service_result
 
 
 - name: Ensure systemd reloaded after keycloak.service installation
-  service:
+  systemd:
     daemon_reload: yes
   when: "keycloak_systemd_service_result.changed"

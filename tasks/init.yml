@@ -1,9 +1,3 @@
-- name: Add keycloak to the systemd service list
-  set_fact:
-    keycloak_systemd_services_list: "{{ keycloak_systemd_services_list + ['keycloak'] }}"
-  tags:
-    - always
-
 - name: Add nginx to the systemd service list
   set_fact:
     keycloak_systemd_services_list: "{{ keycloak_systemd_services_list + ['nginx'] }}"
@@ -17,7 +11,15 @@
   tags:
     - always
 
+- name: Add keycloak to the systemd service list
+  set_fact:
+    keycloak_systemd_services_list: "{{ keycloak_systemd_services_list + ['keycloak'] }}"
+  tags:
+    - always
+
 - name: Create docker network
   docker_network:
     name: "{{ keycloak_docker_network }}"
   when: keycloak_postgres_enabled
+  tags:
+    - always

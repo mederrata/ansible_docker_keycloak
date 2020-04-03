@@ -17,10 +17,9 @@ ExecStart=/usr/bin/docker run --rm --name keycloak-postgres \
 			{% if keycloak_postgres_container_postgres_bind_port %}
 			-p {{ keycloak_postgres_container_postgres_bind_port }}:5432 \
 			{% endif %}
-			--env-file={{ keycloak_postgres_base_path }}/env-postgres-server \
+			--env-file={{ keycloak_postgres_base_path }}/env-postgres-psql \
 			-e PGDATA=/var/lib/postgresql/data/pgdata \
 			-v {{ keycloak_postgres_data_path }}:/var/lib/postgresql/data:rw \
-			-v /etc/passwd:/etc/passwd:ro \
 			{% for arg in keycloak_postgres_container_extra_arguments %}
 			{{ arg }} \
 			{% endfor %}

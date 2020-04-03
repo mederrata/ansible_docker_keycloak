@@ -44,4 +44,4 @@
   file:
     path: "{{ keycloak_systemd_path }}/postgres.service"
     state: absent
-  when: not keycloak_postgres_enabled
+  when: not keycloak_postgres_enabled|bool

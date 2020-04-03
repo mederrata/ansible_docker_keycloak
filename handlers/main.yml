@@ -7,6 +7,11 @@
     name: keycloak
     state: started
 
+- name: Stop Keycloak
+  service:
+    name: keycloak
+    state: Stop
+
 - name: Reload Keycloak
   service:
     name: keycloak

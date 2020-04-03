@@ -22,18 +22,15 @@
   tags:
     - setup-all
     - setup-keycloak
-
-- name: Ensure Systemd Services Stopped
-  systemd:
-    name: "{{ item }}"
-    state: stopped
-  with_items: "{{ keycloak_systemd_services_list }}"
-  become: true
+  
+- name: Ensure No Nginx cache exists. Resolves Bad Gateway errors
+  file:
+    path: /var/cache/nginx
+    state: absent
   tags:
-    - setup-all
-    - setup-keycloak
-
-- name: Ensure Systemd Services Started
+    - always
+    
+- name: Ensure Systemd Services retarted
   systemd:
     name: "{{ item }}"
     state: started
@@ -43,3 +40,4 @@
   tags:
     - setup-all
     - setup-keycloak
+    - setup-nginx

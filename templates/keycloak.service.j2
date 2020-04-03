@@ -14,8 +14,9 @@ ExecStart=/usr/bin/docker run --rm --name keycloak \
 			-e KEYCLOAK_USER={{ keycloak_admin }} -e KEYCLOAK_PASSWORD={{ keycloak_admin_password }} \
 			-e PROXY_ADDRESS_FORWARDING=true \
 			-p 8442:8080 \
-			--mount type=bind,source=/etc/letsencrypt/live/keycloak/cert.pem,target=/etc/x509/https/tls.crt,readonly \
-			--mount type=bind,source=/etc/letsencrypt/live/keycloak/key.pem,target=/etc/x509/https/tls.key,readonly \
+			-v /etc/letsencrypt/live/keycloak/cert.pem:/etc/x509/https/tls.crt:ro \
+			-v /etc/letsencrypt/live/keycloak/key.pem:/etc/x509/https/tls.key:ro \
+			-v {{ keycloak_install_directory }}:/opt/:rw \
 			{% for arg in keycloak_container_extra_arguments %}
 			{{ arg }} \
 			{% endfor %}

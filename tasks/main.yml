@@ -13,6 +13,13 @@
     - setup-all
     - setup-keycloak
 
+- name: Create docker network
+  docker_network:
+    name: "{{ keycloak_docker_network }}"
+  when: keycloak_postgres_enabled
+  tags:
+    - always
+
 - name: Ensure Systemd Services stopped
   systemd:
     name: "{{ item }}"

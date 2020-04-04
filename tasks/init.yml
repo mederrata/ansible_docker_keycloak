@@ -17,13 +17,6 @@
   tags:
     - always
 
-- name: Create docker network
-  docker_network:
-    name: "{{ keycloak_docker_network }}"
-  when: keycloak_postgres_enabled
-  tags:
-    - always
-
 - name: Create keycloak group
   group:
     name: "{{ keycloak_user_username }}"

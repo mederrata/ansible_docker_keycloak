@@ -30,7 +30,7 @@
   import_tasks: "{{ role_path }}/tasks/setup_nginx.yml"
   become: yes
   tags:
-    - setup-ngnix
+    - setup-nginx
     - setup-all
 
 - name: Setup Docker

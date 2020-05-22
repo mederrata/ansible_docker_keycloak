@@ -3,10 +3,10 @@
 
 
 keycloak_domain_name: 'example.com'
-keycloak_docker_image: jboss/keycloak:9.0.2
+keycloak_docker_image: jboss/keycloak:10.0.1 # https://hub.docker.com/r/jboss/keycloak
 keycloak_https_bind_port: 8442
 keycloak_http_bind_port: 8080
-keycloak_version: 9.0.2
+keycloak_version: 10.0.1
 keycloak_admin: admin
 keycloak_admin_password: ''
 keycloak_realm_name: ''
@@ -22,14 +22,14 @@ keycloak_user_gid: 995
 keycloak_postgres_enabled: false
 keycloak_postgres_base_path: "{{ keycloak_install_directory }}/postgres"
 keycloak_postgres_data_path: "{{ keycloak_postgres_base_path }}/data"
-keycloak_postgres_docker_image: "postgres:12.2-alpine"
+keycloak_postgres_docker_image: "postgres:12.3-alpine" # https://hub.docker.com/_/postgres/
 keycloak_postgres_container_postgres_bind_port: 5432
 keycloak_postgres_container_extra_arguments: []
 keycloak_postgres_connection_username: ""
 keycloak_postgres_connection_password: ""
 keycloak_postgres_db_name: ""
 
-
+letsencrypt_certbot_enabled: false
 letsencrypt_certbot_admin_email: "example@example.com"
 letsencrypt_certbot_create_if_missing: true
 letsencrypt_certbot_create_standalone_stop_services: []

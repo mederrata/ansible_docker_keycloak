@@ -35,10 +35,10 @@ A description of the settable variables for this role should go here, including 
 | Role Variable | Default | Status |
 |--------------|---------|-------|
 | `keycloak_domain_name` | "example.com" | required |
-| `keycloak_docker_image` | "jboss/keycloak:9.0.2"| optional |
+| `keycloak_docker_image` | "jboss/keycloak:10.0.1"| optional |
 | `keycloak_https_bind_port` |  8442 | unused |
 | `keycloak_http_bind_port` | 8080 | unused |
-| `keycloak_version` | 9.0.2 | unused |
+| `keycloak_version` | 10.0.1 | unused |
 | `keycloak_admin` | admin | optional |
 | `keycloak_admin_password` | '' | required |
 | `keycloak_realm_name` | '' | unused |
@@ -53,12 +53,12 @@ A description of the settable variables for this role should go here, including 
 | `keycloak_postgres_enabled` | false | optional |
 | `keycloak_postgres_base_path` | "{{ keycloak_install_directory }}/postgres" | optional |
 | `keycloak_postgres_data_path` | "{{ keycloak_postgres_base_path }}/data" | optional  |
-| `keycloak_postgres_docker_image` | "postgres:12.2-alpine" | optional |
+| `keycloak_postgres_docker_image` | "postgres:12.3-alpine" | optional |
 | `keycloak_postgres_container_postgres_bind_port` | 5432 | optional |
 | `keycloak_postgres_container_extra_arguments` | [] | optional |
 | `keycloak_postgres_connection_username` | "" | required |
 | `keycloak_postgres_connection_password` | "" | required |
-| `letsencrypt_certbot_enabled` | false | unused |
+| `letsencrypt_certbot_enabled` | false | optional |
 | `keycloak_postgres_db_name` | "" | optional |
 | `letsencrypt_certbot_admin_email` | "example@example.com" | optional  |
 | `letsencrypt_certbot_create_if_missing` | true | unused |

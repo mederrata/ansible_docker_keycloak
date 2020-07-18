@@ -24,6 +24,7 @@
         - name: Add Debian Key
           apt_key:
             id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+            url: https://download.docker.com/linux/debian/gpg
             state: present
         - name: Install Docker Repository (Debian)
           apt_repository:

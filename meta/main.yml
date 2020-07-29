@@ -27,8 +27,13 @@ galaxy_info:
   # To view available platforms and versions (or releases), visit:
   # https://galaxy.ansible.com/api/v1/platforms/
   #
-  # platforms:
-  # - name: Fedora
+  platforms:
+    - name: Debian
+      versions:
+      - buster
+    - name: Ubuntu
+      versions:
+      - xenial
   #   versions:
   #   - all
   #   - 25
@@ -54,4 +59,3 @@ dependencies:
   # andrewrothstein.keycloak
   # List your role dependencies here, one per line. Be sure to remove the '[]' above,
   # if you add dependencies to this list.
-  

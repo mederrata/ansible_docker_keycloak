@@ -12,23 +12,19 @@
     source: pull
 
 - name: Ensure Install Directory Exists
-  file: 
+  file:
     path: "{{ keycloak_install_directory }}"
     state: directory
     owner: "{{ keycloak_user_uid }}"
     group: "{{ keycloak_user_gid }}"
     mode: 0750
-  
+
 
 - name: Ensure keycloak.service installed
   template:
     src: "{{ role_path }}/templates/keycloak.service.j2"
     dest: "{{ keycloak_systemd_path }}/keycloak.service"
     mode: 0640
+  notify:
+    - reload systemd
   register: keycloak_systemd_service_result
-
-
-- name: Ensure systemd reloaded after keycloak.service installation
-  systemd:
-    daemon_reload: yes
-  when: "keycloak_systemd_service_result.changed"

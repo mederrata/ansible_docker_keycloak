@@ -53,14 +53,14 @@
     - setup-keycloak
     - setup-postgres
     - setup-nginx
-  
+
 - name: Ensure No Nginx cache exists. Resolves Bad Gateway errors
   file:
     path: /var/cache/nginx
     state: absent
   tags:
     - always
-    
+
 - name: Ensure Systemd Services started
   systemd:
     name: "{{ item }}"

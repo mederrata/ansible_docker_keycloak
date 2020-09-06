@@ -1,4 +1,5 @@
-- fail: msg="Bailing out. this play requires 'keycloak_postgres_connection_username'"
+- name: Check keycloak_postgres_connection_username variable
+  fail: msg="Bailing out. this play requires 'keycloak_postgres_connection_username'"
   when: keycloak_postgres_connection_username is undefined
 
 - name: Pull Postgres Docker

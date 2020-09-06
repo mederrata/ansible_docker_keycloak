@@ -3,7 +3,8 @@
 # https://hub.docker.com/r/jboss/keycloak/tags
 #
 
-- fail: msg="Bailing out. this play requires 'keycloak_admin_password'"
+- name: Check keycloak_admin_password variable
+  fail: msg="Bailing out. this play requires 'keycloak_admin_password'"
   when: keycloak_admin_password is undefined
 
 - name: Pull Keycloak Docker

@@ -5,7 +5,7 @@
 keycloak_domain_name: 'example.com'
 keycloak_registry_name: quay.io/keycloak/keycloak
 keycloak_version: 11.0.2
-keycloak_docker_image: "{{ keycloak_container_name}}:{{  keycloak_version }}" # https://hub.docker.com/r/jboss/keycloak
+keycloak_docker_image: "{{ keycloak_registry_name }}:{{  keycloak_version }}" # https://hub.docker.com/r/jboss/keycloak
 keycloak_https_bind_port: 8442
 keycloak_http_bind_port: 8080
 keycloak_admin: admin

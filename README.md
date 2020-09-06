@@ -36,7 +36,7 @@ A description of the settable variables for this role should go here, including 
 |--------------|---------|-------|
 | `keycloak_domain_name` | "example.com" | required |
 | `keycloak_registry_name` | "quay.io/keycloak/keycloak" | optional |
-| `keycloak_docker_image` | "{{ keycloak_container_name}}:{{  keycloak_version }}" | optional |
+| `keycloak_docker_image` | "{{ keycloak_registry_name }}:{{  keycloak_version }}" | optional |
 | `keycloak_https_bind_port` |  8442 | unused |
 | `keycloak_http_bind_port` | 8080 | unused |
 | `keycloak_version` | 11.0.2 | optional |

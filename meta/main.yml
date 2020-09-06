@@ -33,6 +33,7 @@ galaxy_info:
       - buster
     - name: Ubuntu
       versions:
+      - focal
       - xenial
   #   versions:
   #   - all

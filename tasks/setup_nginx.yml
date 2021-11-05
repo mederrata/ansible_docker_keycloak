@@ -12,7 +12,7 @@
 
     - name: Install Ngnix
       include_role:
-        name: hispanico.nginx-revproxy
+        name: hispanico.nginx_revproxy
       vars:
         nginx_revproxy_sites:
           default:

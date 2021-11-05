@@ -23,7 +23,7 @@ keycloak_user_gid: 995
 keycloak_postgres_enabled: false
 keycloak_postgres_base_path: "{{ keycloak_install_directory }}/postgres"
 keycloak_postgres_data_path: "{{ keycloak_postgres_base_path }}/data"
-keycloak_postgres_docker_image: "postgres:12.3-alpine" # https://hub.docker.com/_/postgres/
+keycloak_postgres_docker_image: "docker.io/library/postgres:12.3-alpine" # https://hub.docker.com/_/postgres/
 keycloak_postgres_container_postgres_bind_port: 5432
 keycloak_postgres_container_extra_arguments: []
 keycloak_postgres_connection_username: ""

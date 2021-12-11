@@ -39,7 +39,7 @@ A description of the settable variables for this role should go here, including 
 | `keycloak_docker_image` | "{{ keycloak_registry_name }}:{{  keycloak_version }}" | optional |
 | `keycloak_https_bind_port` |  8442 | unused |
 | `keycloak_http_bind_port` | 8080 | unused |
-| `keycloak_version` | 11.0.2 | optional |
+| `keycloak_version` | 15.1.0 | optional |
 | `keycloak_admin` | admin | optional |
 | `keycloak_admin_password` | '' | required |
 | `keycloak_realm_name` | '' | unused |
@@ -54,7 +54,7 @@ A description of the settable variables for this role should go here, including 
 | `keycloak_postgres_enabled` | false | optional |
 | `keycloak_postgres_base_path` | "{{ keycloak_install_directory }}/postgres" | optional |
 | `keycloak_postgres_data_path` | "{{ keycloak_postgres_base_path }}/data" | optional  |
-| `keycloak_postgres_docker_image` | "postgres:12.3-alpine" | optional |
+| `keycloak_postgres_docker_image` | "postgres:14.1-alpine" | optional |
 | `keycloak_postgres_container_postgres_bind_port` | 5432 | optional |
 | `keycloak_postgres_container_extra_arguments` | [] | optional |
 | `keycloak_postgres_connection_username` | "" | required |

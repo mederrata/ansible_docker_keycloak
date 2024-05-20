@@ -25,7 +25,7 @@ ExecStart=/usr/bin/docker run --rm --name keycloak \
 			{% for arg in keycloak_container_extra_arguments %}
 			{{ arg }} \
 			{% endfor %}
-			{{ keycloak_docker_image }}
+			{{ keycloak_docker_image }} start
 
 ExecStop=-/usr/bin/docker kill keycloak
 ExecStop=-/usr/bin/docker rm keycloak

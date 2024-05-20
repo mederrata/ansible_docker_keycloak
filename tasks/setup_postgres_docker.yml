@@ -45,4 +45,4 @@
     state: absent
   notify:
     - Reload systemd
-  when: not keycloak_postgres_enabled|bool    git push --set-upstream origin fix-ansible-lint-errors
+  when: not keycloak_postgres_enabled|bool

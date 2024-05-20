@@ -77,7 +77,7 @@ A list of other roles hosted on Galaxy should go here, plus any details in regar
     	+ Github: https://github.com/hispanico/ansible-nginx-revproxy
     	+ Ansible Galaxy: https://galaxy.ansible.com/hispanico/nginx-revproxy
  * ansible-docker-keycloak
-    - Install: `ansible-galaxy role install git+https://github.com/hungrymonkey/ansible-docker-keycloak.git`
+    - Install: `ansible-galaxy role install git+https://github.com/mederrata/ansible_docker_keycloak.git`
 
 Example Playbook
 ----------------

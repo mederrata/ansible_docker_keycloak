@@ -1,6 +1,6 @@
 galaxy_info:
   author: Ted Chang
-  role_name: ansible_keycloak
+  role_name: ansible_docker_keycloak
   description: Installs and configures keycloak with SSL support
   company: mederrata
   namespace: mederrata

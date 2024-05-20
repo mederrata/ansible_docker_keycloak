@@ -4,7 +4,7 @@
 
 keycloak_domain_name: 'example.com'
 keycloak_registry_name: quay.io/keycloak/keycloak
-keycloak_version: 15.1.0
+keycloak_version: 24.0.4
 keycloak_docker_image: "{{ keycloak_registry_name }}:{{  keycloak_version }}" # https://hub.docker.com/r/jboss/keycloak
 keycloak_https_bind_port: 8442
 keycloak_http_bind_port: 8080
@@ -23,7 +23,7 @@ keycloak_user_gid: 995
 keycloak_postgres_enabled: false
 keycloak_postgres_base_path: "{{ keycloak_install_directory }}/postgres"
 keycloak_postgres_data_path: "{{ keycloak_postgres_base_path }}/data"
-keycloak_postgres_docker_image: "docker.io/library/postgres:14.1-alpine" # https://hub.docker.com/_/postgres/
+keycloak_postgres_docker_image: "docker.io/library/postgres:16.3-bookworm" # https://hub.docker.com/_/postgres/
 keycloak_postgres_container_postgres_bind_port: 5432
 keycloak_postgres_container_extra_arguments: []
 keycloak_postgres_connection_username: ""

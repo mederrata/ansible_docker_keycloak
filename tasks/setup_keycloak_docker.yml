@@ -28,5 +28,5 @@
     dest: "{{ keycloak_systemd_path }}/keycloak.service"
     mode: "0640"
   notify:
-    - reload systemd
+    - Reload systemd
   register: keycloak_systemd_service_result

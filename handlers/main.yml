@@ -33,6 +33,6 @@
     name: postgres
     state: restarted
 
-- name: Reload ansible.builtin.systemd_service
+- name: Reload systemd
   ansible.builtin.systemd_service:
     daemon_reload: true

@@ -27,7 +27,7 @@
     dest: "{{ keycloak_systemd_path }}/postgres.service"
     mode: "0640"
   notify:
-    - reload systemd
+    - Reload systemd
   when: keycloak_postgres_enabled|bool
 
 - name: Ensure postgres setting files are installed
@@ -44,5 +44,5 @@
     path: "{{ keycloak_systemd_path }}/postgres.service"
     state: absent
   notify:
-    - reload systemd
+    - Reload systemd
   when: not keycloak_postgres_enabled|bool    git push --set-upstream origin fix-ansible-lint-errors

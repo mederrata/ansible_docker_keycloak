@@ -17,6 +17,11 @@
         name: ['docker.io', 'python3-docker', 'python3-dockerpty']
         state: present
 
+    - name: Install Ngnix dependencies
+      ansible.builtin.apt:
+        name: ['cron']
+        state: present
+
 - name: Install Docker (RedHat).
   when: ansible_os_family == 'RedHat'
   block:
@@ -29,3 +34,9 @@
       ansible.builtin.yum:
         name: ['docker.io']
         state: present
+    
+    - name: Install Ngnix dependencies
+      ansible.builtin.yum:
+        name: ['vixie-cron']
+        state: present
+

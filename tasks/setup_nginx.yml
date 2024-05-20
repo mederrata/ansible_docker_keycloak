@@ -16,6 +16,10 @@
       ansible.builtin.include_role:
         name: hispanico.nginx_revproxy
       vars:
+        nginx_revproxy_certbot_auto: false
+        nginx_revproxy_certbot_packages:
+          - certbot
+          - python3-certbot-nginx
         nginx_revproxy_sites:
           default:
             ssl: false

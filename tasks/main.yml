@@ -1,51 +1,51 @@
 ---
 # tasks file for ansible-docker-keycloak
-- name: init vars
-  import_tasks: "{{ role_path }}/tasks/init.yml"
-  become: yes
+- name: Init vars
+  ansible.builtin.import_tasks: "{{ role_path }}/tasks/init.yml"
+  become: true
   tags:
     - always
 
 - name: Install Dependencies
-  import_tasks: "{{ role_path }}/tasks/install_dependencies.yml"
-  become: yes
+  ansible.builtin.import_tasks: "{{ role_path }}/tasks/install_dependencies.yml"
+  become: true
   tags:
     - setup-all
     - setup-keycloak
 
 - name: Create docker network
-  docker_network:
+  community.docker.docker_network:
     name: "{{ keycloak_docker_network }}"
   when: keycloak_postgres_enabled
   tags:
     - always
 
 - name: Setup Nginx
-  import_tasks: "{{ role_path }}/tasks/setup_nginx.yml"
-  become: yes
+  ansible.builtin.import_tasks: "{{ role_path }}/tasks/setup_nginx.yml"
+  become: true
   tags:
     - setup-nginx
     - setup-all
 
 - name: Setup Docker
-  import_tasks: "{{ role_path }}/tasks/setup_keycloak_docker.yml"
-  become: yes
+  ansible.builtin.import_tasks: "{{ role_path }}/tasks/setup_keycloak_docker.yml"
+  become: true
   tags:
     - setup-all
     - setup-keycloak
 
 - name: Setup Docker
-  import_tasks: "{{ role_path }}/tasks/setup_postgres_docker.yml"
-  become: yes
+  ansible.builtin.import_tasks: "{{ role_path }}/tasks/setup_postgres_docker.yml"
+  become: true
   tags:
     - setup-all
     - setup-postgres
 
 - name: Ensure Systemd Services stopped
-  systemd:
+  ansible.builtin.systemd_service:
     name: "{{ item }}"
     state: stopped
-    enabled: yes
+    enabled: true
   with_items: "{{ keycloak_systemd_services_list }}"
   become: true
   tags:
@@ -55,17 +55,17 @@
     - setup-nginx
 
 - name: Ensure No Nginx cache exists. Resolves Bad Gateway errors
-  file:
+  ansible.builtin.file:
     path: /var/cache/nginx
     state: absent
   tags:
     - always
 
 - name: Ensure Systemd Services started
-  systemd:
+  ansible.builtin.systemd_service:
     name: "{{ item }}"
     state: started
-    enabled: yes
+    enabled: true
   with_items: "{{ keycloak_systemd_services_list }}"
   become: true
   tags:

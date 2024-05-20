@@ -1,30 +1,30 @@
 - name: Add nginx to the systemd service list
-  set_fact:
+  ansible.builtin.set_fact:
     keycloak_systemd_services_list: "{{ keycloak_systemd_services_list + ['nginx'] }}"
   tags:
     - always
 
 - name: Add postgres to the systemd service list
-  set_fact:
+  ansible.builtin.set_fact:
     keycloak_systemd_services_list: "{{ keycloak_systemd_services_list + ['postgres'] }}"
   when: keycloak_postgres_enabled
   tags:
     - always
 
 - name: Add keycloak to the systemd service list
-  set_fact:
+  ansible.builtin.set_fact:
     keycloak_systemd_services_list: "{{ keycloak_systemd_services_list + ['keycloak'] }}"
   tags:
     - always
 
 - name: Create keycloak group
-  group:
+  ansible.builtin.group:
     name: "{{ keycloak_user_username }}"
     gid: "{{ keycloak_user_gid }}"
     state: present
 
 - name: Create keycloak user
-  user:
+  ansible.builtin.user:
     name: "{{ keycloak_user_username }}"
     uid: "{{ keycloak_user_uid }}"
     group: "{{ keycloak_user_gid }}"

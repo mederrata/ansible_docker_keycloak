@@ -1,47 +1,48 @@
 - name: Check keycloak_postgres_connection_username variable
-  fail: msg="Bailing out. this play requires 'keycloak_postgres_connection_username'"
+  ansible.builtin.fail:
+    msg: "Bailing out. this play requires 'keycloak_postgres_connection_username'"
   when: keycloak_postgres_connection_username is undefined
 
 - name: Pull Postgres Docker
-  docker_image:
+  community.docker.docker_image:
     name: "{{ keycloak_postgres_docker_image }}"
     source: pull
   when: keycloak_postgres_enabled|bool
 
 - name: Ensure Install Postgres Directory Exists
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     owner: "{{ keycloak_user_uid }}"
     group: "{{ keycloak_user_gid }}"
-    mode: 0700
+    mode: "0700"
   with_items:
     - "{{ keycloak_postgres_base_path }}"
     - "{{ keycloak_postgres_data_path }}"
   when: keycloak_postgres_enabled|bool
 
 - name: Ensure postgres.service installed
-  template:
+  ansible.builtin.template:
     src: "{{ role_path }}/templates/postgres.service.j2"
     dest: "{{ keycloak_systemd_path }}/postgres.service"
-    mode: 0640
+    mode: "0640"
   notify:
     - reload systemd
   when: keycloak_postgres_enabled|bool
 
 - name: Ensure postgres setting files are installed
-  template:
+  ansible.builtin.template:
     src: "{{ role_path }}/templates/env-postgres-psql.j2"
     dest: "{{ keycloak_postgres_base_path }}/env-postgres-psql"
     owner: "{{ keycloak_user_uid }}"
     group: "{{ keycloak_user_gid }}"
-    mode: 0640
+    mode: "0640"
   when: keycloak_postgres_enabled|bool
 
 - name: Ensure postgres.service doesn't exist
-  file:
+  ansible.builtin.file:
     path: "{{ keycloak_systemd_path }}/postgres.service"
     state: absent
   notify:
     - reload systemd
-  when: not keycloak_postgres_enabled|bool
+  when: not keycloak_postgres_enabled|bool    git push --set-upstream origin fix-ansible-lint-errors

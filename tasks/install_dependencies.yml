@@ -4,26 +4,28 @@
 #
 
 - name: Install Docker (Debian Family).
+  when: ansible_os_family == 'Debian'
   block:
     - name: Update apt cache.
-      apt: update_cache=true cache_valid_time=600
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 600
       changed_when: false
 
     - name: Install Docker Package
-      apt:
+      ansible.builtin.apt:
         name: ['docker.io', 'python3-docker', 'python3-dockerpty']
         state: present
-  when: ansible_os_family == 'Debian'
 
 - name: Install Docker (RedHat).
+  when: ansible_os_family == 'RedHat'
   block:
     - name: Install Yum Repo Tools
-      yum:
+      ansible.builtin.yum:
         name: ['yum-utils', 'device-mapper-persistent-data', 'lvm2']
         state: present
 
     - name: Install Docker Packages (RedHat).
-      yum:
+      ansible.builtin.yum:
         name: ['docker.io']
         state: present
-  when: ansible_os_family == 'RedHat'

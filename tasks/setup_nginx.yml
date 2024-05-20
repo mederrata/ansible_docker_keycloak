@@ -5,13 +5,15 @@
 
 - name: Install Nginx
   block:
-    - name: update apt cache
-      apt: update_cache=true cache_valid_time=600
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 600
       changed_when: false
       when: ansible_os_family == 'Debian'
 
     - name: Install Ngnix
-      include_role:
+      ansible.builtin.include_role:
         name: hispanico.nginx_revproxy
       vars:
         nginx_revproxy_sites:

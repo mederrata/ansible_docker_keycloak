@@ -12,20 +12,24 @@ ExecStartPre=-/usr/bin/docker rm keycloak
 ExecStart=/usr/bin/docker run --rm --name keycloak \
 			--log-driver=none \
 			-e KEYCLOAK_USER={{ keycloak_admin }} -e KEYCLOAK_PASSWORD={{ keycloak_admin_password }} \
-			-e PROXY_ADDRESS_FORWARDING=true \
 			-p 8442:8080 \
 			-v /etc/letsencrypt/live/keycloak/cert.pem:/etc/x509/https/tls.crt:ro \
 			-v /etc/letsencrypt/live/keycloak/key.pem:/etc/x509/https/tls.key:ro \
 			{% if keycloak_postgres_enabled %}
 			--net {{ keycloak_docker_network }} \
-			-e DB_VENDOR=postgres \
-			-e DB_USER={{ keycloak_postgres_connection_username }} -e DB_PASSWORD={{ keycloak_postgres_connection_password }} \
-			-e DB_DATABASE={{ keycloak_postgres_db_name }} -e DB_ADDR=keycloak-postgres \
 			{% endif %}
 			{% for arg in keycloak_container_extra_arguments %}
 			{{ arg }} \
 			{% endfor %}
-			{{ keycloak_docker_image }} start
+			{{ keycloak_docker_image }} start \
+			--hostname={{ keycloak_domain_name }} \
+			--https-certificate-file=/etc/x509/https/tls.crt \
+			--https-certificate-key-file=/etc/x509/https/tls.key \
+			--proxy-headers=forwarded \
+			--db=postgres --features=token-exchange \
+			--db-username={{ keycloak_postgres_connection_username }} --db-password={{ keycloak_postgres_connection_password }} \
+			--db-schema={{ keycloak_postgres_db_name }} \
+			--db-url=jdbc:postgresql://localhost/keycloak-postgres
 
 ExecStop=-/usr/bin/docker kill keycloak
 ExecStop=-/usr/bin/docker rm keycloak

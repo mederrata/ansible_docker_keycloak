@@ -21,10 +21,10 @@
     - "{{ keycloak_postgres_data_path }}"
   when: keycloak_postgres_enabled|bool
 
-- name: Ensure postgres.service installed
+- name: Ensure keycloak-postgres.service installed
   ansible.builtin.template:
-    src: "{{ role_path }}/templates/postgres.service.j2"
-    dest: "{{ keycloak_systemd_path }}/postgres.service"
+    src: "{{ role_path }}/templates/keycloak-postgres.service.j2"
+    dest: "{{ keycloak_systemd_path }}/keycloak-postgres.service"
     mode: "0640"
   notify:
     - Reload systemd
@@ -39,9 +39,9 @@
     mode: "0640"
   when: keycloak_postgres_enabled|bool
 
-- name: Ensure postgres.service doesn't exist
+- name: Ensure keycloak-postgres.service doesn't exist
   ansible.builtin.file:
-    path: "{{ keycloak_systemd_path }}/postgres.service"
+    path: "{{ keycloak_systemd_path }}/keycloak-postgres.service"
     state: absent
   notify:
     - Reload systemd

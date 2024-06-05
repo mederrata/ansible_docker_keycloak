@@ -34,9 +34,8 @@
       ansible.builtin.yum:
         name: ['docker.io']
         state: present
-    
+
     - name: Install Ngnix dependencies
       ansible.builtin.yum:
         name: ['vixie-cron']
         state: present
-

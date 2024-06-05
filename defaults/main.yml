@@ -28,7 +28,7 @@ keycloak_postgres_container_postgres_bind_port: 5432
 keycloak_postgres_container_extra_arguments: []
 keycloak_postgres_connection_username: ""
 keycloak_postgres_connection_password: ""
-#https://github.com/keycloak/keycloak/issues/20870 
+# https://github.com/keycloak/keycloak/issues/20870
 keycloak_postgres_db_name: ""
 
 letsencrypt_certbot_enabled: false

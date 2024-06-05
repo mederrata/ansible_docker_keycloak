@@ -30,16 +30,6 @@
     group: "{{ keycloak_user_gid }}"
     mode: "0750"
 
-
-- name: Ensure build keycloak command is installed
-  ansible.builtin.template:
-    src: "{{ role_path }}/templates/bin/build-keycloak.j2"
-    dest: "{{ keycloak_install_directory }}/bin/build-keycloak"
-    owner: "{{ keycloak_user_uid }}"
-    group: "{{ keycloak_user_gid }}"
-    mode: "0640"
-
-
 - name: Ensure keycloak.service installed
   ansible.builtin.template:
     src: "{{ role_path }}/templates/keycloak.service.j2"
@@ -49,6 +39,13 @@
     - Reload systemd
   register: keycloak_systemd_service_result
 
+- name: Ensure Postgres is started
+  ansible.builtin.systemd_service:
+    name: "{{ postgres }}"
+    state: started
+    enabled: true
+
 - name: Build keycloak image
   ansible.builtin.shell:
     cmd: "{{ keycloak_install_directory }}/bin/build-keycloak"
+  register: keycloak_build_result

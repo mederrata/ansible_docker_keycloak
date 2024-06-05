@@ -22,6 +22,24 @@
     mode: "0750"
 
 
+- name: Ensure bin directory Exists
+  ansible.builtin.file:
+    path: "{{ keycloak_install_directory }}/bin"
+    state: directory
+    owner: "{{ keycloak_user_uid }}"
+    group: "{{ keycloak_user_gid }}"
+    mode: "0750"
+
+
+- name: Ensure build keycloak command is installed
+  ansible.builtin.template:
+    src: "{{ role_path }}/templates/bin/build-keycloak.j2"
+    dest: "{{ keycloak_install_directory }}/bin/build-keycloak"
+    owner: "{{ keycloak_user_uid }}"
+    group: "{{ keycloak_user_gid }}"
+    mode: "0640"
+
+
 - name: Ensure keycloak.service installed
   ansible.builtin.template:
     src: "{{ role_path }}/templates/keycloak.service.j2"
@@ -30,3 +48,7 @@
   notify:
     - Reload systemd
   register: keycloak_systemd_service_result
+
+- name: Build keycloak image
+  ansible.builtin.shell:
+    cmd: "{{ keycloak_install_directory }}/bin/build-keycloak"

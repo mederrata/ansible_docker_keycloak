@@ -30,6 +30,14 @@
     group: "{{ keycloak_user_gid }}"
     mode: "0750"
 
+- name: Ensure build keycloak script exist
+  ansible.builtin.file:
+    src: "{{ role_path }}/templates/bin/build-keycloak.j2"
+    dest: "{{ keycloak_install_directory }}/bin/build-keycloak"
+    owner: "{{ keycloak_user_uid }}"
+    group: "{{ keycloak_user_gid }}"
+    mode: "0750"
+
 - name: Ensure keycloak.service installed
   ansible.builtin.template:
     src: "{{ role_path }}/templates/keycloak.service.j2"

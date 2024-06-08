@@ -39,6 +39,8 @@
     - Reload systemd
   register: keycloak_systemd_service_result
 
+# sudo apt install postgresql-client
+# Test database psql -h keycloak-postgres -U keycloak -d keycloakPostgres
 - name: Ensure Postgres is started
   ansible.builtin.systemd_service:
     name: "{{ postgres }}"

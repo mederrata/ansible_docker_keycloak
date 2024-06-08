@@ -43,7 +43,7 @@
 # Test database psql -h keycloak-postgres -U keycloak -d keycloakPostgres
 - name: Ensure Postgres is started
   ansible.builtin.systemd_service:
-    name: "{{ postgres }}"
+    name: "keycloak-postgres"
     state: started
     enabled: true
 

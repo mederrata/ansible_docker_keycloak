@@ -31,7 +31,7 @@
     mode: "0750"
 
 - name: Ensure build keycloak script exist
-  ansible.builtin.file:
+  ansible.builtin.template:
     src: "{{ role_path }}/templates/bin/build-keycloak.j2"
     dest: "{{ keycloak_install_directory }}/bin/build-keycloak"
     owner: "{{ keycloak_user_uid }}"

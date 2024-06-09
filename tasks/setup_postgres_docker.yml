@@ -21,6 +21,7 @@
     - "{{ keycloak_postgres_data_path }}"
   when: keycloak_postgres_enabled|bool
 
+# Test container  sudo /usr/bin/docker run --rm --name test-postgres --network keycloak-network -it postgres:16.3-bookworm bash
 - name: Ensure keycloak-postgres.service installed
   ansible.builtin.template:
     src: "{{ role_path }}/templates/keycloak-postgres.service.j2"

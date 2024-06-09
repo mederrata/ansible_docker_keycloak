@@ -1,25 +1,3 @@
 #!/bin/bash
 
-
-/usr/bin/docker run --rm --name keycloak \
-			--log-driver=none \
-			-e KEYCLOAK_USER={{ keycloak_admin }} -e KEYCLOAK_PASSWORD={{ keycloak_admin_password }} \
-			-e KC_DB_USERNAME={{ keycloak_postgres_connection_username }} \
-			-e KC_DB_PASSWORD={{ keycloak_postgres_connection_password }} \
-			-e KC_DB_URL=jdbc:postgresql://keycloak-postgres:5432/{{ keycloak_postgres_db_name }} \
-			-e KC_DB=postgres \
-			-p 8442:8080 \
-			-v /etc/letsencrypt/live/keycloak/cert.pem:/etc/x509/https/tls.crt:ro \
-			-v /etc/letsencrypt/live/keycloak/key.pem:/etc/x509/https/tls.key:ro \
-			{% if keycloak_postgres_enabled %}
-			--net {{ keycloak_docker_network }} \
-			{% endif %}
-			{% for arg in keycloak_container_extra_arguments %}
-			{{ arg }} \
-			{% endfor %}
-			{{ keycloak_docker_image }} start \
-			--hostname={{ keycloak_domain_name }} \
-			--https-certificate-file=/etc/x509/https/tls.crt \
-			--https-certificate-key-file=/etc/x509/https/tls.key \
-			--proxy-headers=forwarded \
-			--db=postgres --features=token-exchange \
+/usr/bin/docker docker build "{{ keycloak_install_directory }}/Dockerfile" -t mykeycloak

@@ -6,7 +6,7 @@
 
 - name: Add postgres to the systemd service list
   ansible.builtin.set_fact:
-    keycloak_systemd_services_list: "{{ keycloak_systemd_services_list + ['postgres'] }}"
+    keycloak_systemd_services_list: "{{ keycloak_systemd_services_list + ['keycloak-postgres'] }}"
   when: keycloak_postgres_enabled
   tags:
     - always

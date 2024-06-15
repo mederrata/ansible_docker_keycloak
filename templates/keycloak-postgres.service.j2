@@ -27,12 +27,10 @@ ExecStart=/usr/bin/docker run --rm --name keycloak-postgres \
 			{% for arg in keycloak_postgres_container_extra_arguments %}
 			{{ arg }} \
 			{% endfor %}
-			{{ keycloak_postgres_docker_image }} \
-			-h localhost,keycloak
+			{{ keycloak_postgres_docker_image }}
 
 ExecStop=-/usr/bin/docker stop keycloak-postgres
 ExecStop=-/usr/bin/docker rm keycloak-postgres
-ExecStop=-/usr/bin/docker kill keycloak-postgres
 Restart=always
 RestartSec=30
 SyslogIdentifier=keycloak-postgres

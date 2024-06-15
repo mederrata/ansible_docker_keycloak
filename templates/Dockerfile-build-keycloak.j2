@@ -18,7 +18,6 @@ COPY --from=builder /opt/keycloak/ /opt/keycloak/
 
 ENV KC_HOSTNAME={{ keycloak_domain_name }}
 ENV KC_PROXY_HEADERS=forwarded
-ENV KC_HOSTNAME_URL=http://{{ keycloak_domain_name }}:8080/
 # change these values to point to a running postgres instance
 ENV KC_DB=postgres
 ENV KC_DB_URL=jdbc:postgresql://keycloak-postgres:5432/{{ keycloak_postgres_db_name }}

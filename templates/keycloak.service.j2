@@ -10,6 +10,7 @@ Environment=KC_DB_USERNAME={{ keycloak_postgres_connection_username }}
 Environment=KC_DB_PASSWORD={{ keycloak_postgres_connection_password }}
 Environment=KC_DB_URL=jdbc:postgresql://keycloak-postgres:5432/{{ keycloak_postgres_db_name }}
 Environment=KC_DB=postgres
+
 ExecStartPre=-/usr/bin/docker kill keycloak
 ExecStartPre=-/usr/bin/docker rm keycloak
 

@@ -63,6 +63,12 @@
     state: started
     enabled: true
 
+- name: Ensure keycloak Docker Service is stopped
+  ansible.builtin.systemd_service:
+    name: "keycloak"
+    state: stopped
+    enabled: true
+
 - name: Build keycloak image
   ansible.builtin.shell:
     cmd: "{{ keycloak_install_directory }}/bin/build-keycloak"

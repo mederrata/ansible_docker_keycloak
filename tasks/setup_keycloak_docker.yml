@@ -4,28 +4,72 @@
 #
 
 - name: Check keycloak_admin_password variable
-  fail: msg="Bailing out. this play requires 'keycloak_admin_password'"
+  ansible.builtin.fail:
+    msg: "Bailing out. this play requires 'keycloak_admin_password'"
   when: keycloak_admin_password is undefined
 
 - name: Pull Keycloak Docker
-  docker_image:
+  community.docker.docker_image:
     name: "{{ keycloak_docker_image }}"
     source: pull
 
 - name: Ensure Install Directory Exists
-  file:
+  ansible.builtin.file:
     path: "{{ keycloak_install_directory }}"
     state: directory
     owner: "{{ keycloak_user_uid }}"
     group: "{{ keycloak_user_gid }}"
-    mode: 0750
+    mode: "0750"
 
+
+- name: Ensure bin directory Exists
+  ansible.builtin.file:
+    path: "{{ keycloak_install_directory }}/bin"
+    state: directory
+    owner: "{{ keycloak_user_uid }}"
+    group: "{{ keycloak_user_gid }}"
+    mode: "0750"
+
+- name: Ensure build Dockerfile exist
+  ansible.builtin.template:
+    src: "{{ role_path }}/templates/Dockerfile-build-keycloak.j2"
+    dest: "{{ keycloak_install_directory }}/Dockerfile"
+    owner: "{{ keycloak_user_uid }}"
+    group: "{{ keycloak_user_gid }}"
+    mode: "0640"
+
+- name: Ensure build keycloak script exist
+  ansible.builtin.template:
+    src: "{{ role_path }}/templates/bin/build-keycloak.j2"
+    dest: "{{ keycloak_install_directory }}/bin/build-keycloak"
+    owner: "{{ keycloak_user_uid }}"
+    group: "{{ keycloak_user_gid }}"
+    mode: "0750"
 
 - name: Ensure keycloak.service installed
-  template:
+  ansible.builtin.template:
     src: "{{ role_path }}/templates/keycloak.service.j2"
     dest: "{{ keycloak_systemd_path }}/keycloak.service"
-    mode: 0640
+    mode: "0640"
   notify:
-    - reload systemd
+    - Reload systemd
   register: keycloak_systemd_service_result
+
+# sudo apt install postgresql-client
+# Test database psql -h keycloak-postgres -U keycloak -d keycloakPostgres
+- name: Ensure Postgres is started
+  ansible.builtin.systemd_service:
+    name: "keycloak-postgres"
+    state: started
+    enabled: true
+
+- name: Ensure keycloak Docker Service is stopped
+  ansible.builtin.systemd_service:
+    name: "keycloak"
+    state: stopped
+    enabled: true
+
+- name: Build keycloak image
+  ansible.builtin.shell:
+    cmd: "{{ keycloak_install_directory }}/bin/build-keycloak"
+  register: keycloak_build_result

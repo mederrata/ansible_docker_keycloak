@@ -3,36 +3,40 @@
 # https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html
 
 
-- name: stop keycloak
-  systemd:
+- name: Stop keycloak
+  ansible.builtin.systemd_service:
     name: keycloak
-    state: stop
+    state: stopped
 
-- name: start keycloak
-  systemd:
+- name: Start keycloak
+  ansible.builtin.systemd_service:
     name: keycloak
     state: started
 
-- name: restart keycloak
-  systemd:
+- name: Restart keycloak
+  ansible.builtin.systemd_service:
     name: keycloak
     state: restarted
 
-- name: stop postgres
-  systemd:
+- name: Stop postgres
+  ansible.builtin.systemd_service:
     name: postgres
-    state: stop
+    state: stopped
 
-- name: start postgres
-  systemd:
+- name: Start postgres
+  ansible.builtin.systemd_service:
     name: postgres
     state: started
 
-- name: restart postgres
-  systemd:
+- name: Restart postgres
+  ansible.builtin.systemd_service:
     name: postgres
     state: restarted
 
-- name: reload systemd
-  systemd:
-    daemon_reload: yes
+- name: Reload systemd
+  ansible.builtin.systemd_service:
+    daemon_reload: true
+
+- name: Build keycloak image
+  ansible.builtin.shell:
+    cmd: "{{ keycloak_install_directory }}/bin/build-keycloak"

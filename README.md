@@ -72,12 +72,12 @@ Dependencies
 A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
  * hispanico.nginx-revproxy 
-    - Install: `ansible-galaxy install hispanico.nginx-revproxy`
+    - Install: `ansible-galaxy role install hispanico.nginx_revproxy`
     - Links:
     	+ Github: https://github.com/hispanico/ansible-nginx-revproxy
     	+ Ansible Galaxy: https://galaxy.ansible.com/hispanico/nginx-revproxy
  * ansible-docker-keycloak
-    - Install: `ansible-galaxy install git+https://github.com/hungrymonkey/ansible-docker-keycloak.git`
+    - Install: `ansible-galaxy role install git+https://github.com/mederrata/ansible_docker_keycloak.git`
 
 Example Playbook
 ----------------

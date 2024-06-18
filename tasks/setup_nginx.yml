@@ -1,5 +1,5 @@
 ---
-## https://github.com/hispanico/ansible-nginx-revproxy
+##  
 ##
 
 
@@ -33,5 +33,6 @@
             listen: 80
             listen_ssl: 8443
             ssl: true
+            conn_upgrade: true   
             letsencrypt: "{{ letsencrypt_certbot_enabled }}"
             letsencrypt_email: "{{ letsencrypt_certbot_admin_email }}"

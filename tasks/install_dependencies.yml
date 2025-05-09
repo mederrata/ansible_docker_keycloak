@@ -25,17 +25,17 @@
 - name: Install Docker (RedHat).
   when: ansible_os_family == 'RedHat'
   block:
-    - name: Install Yum Repo Tools
-      ansible.builtin.yum:
-        name: ['yum-utils', 'device-mapper-persistent-data', 'lvm2']
+    - name: Install Dnf Repo Tools
+      ansible.builtin.dnf:
+        name: ['dnf-utils', 'device-mapper-persistent-data', 'lvm2']
         state: present
 
     - name: Install Docker Packages (RedHat).
-      ansible.builtin.yum:
+      ansible.builtin.dnf:
         name: ['docker.io']
         state: present
 
     - name: Install Ngnix dependencies
-      ansible.builtin.yum:
+      ansible.builtin.dnf:
         name: ['vixie-cron']
         state: present

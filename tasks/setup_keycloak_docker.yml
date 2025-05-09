@@ -70,6 +70,7 @@
     enabled: true
 
 - name: Build keycloak image
-  ansible.builtin.shell:
+  ansible.builtin.command:
     cmd: "{{ keycloak_install_directory }}/bin/build-keycloak"
   register: keycloak_build_result
+  changed_when: false

@@ -1,5 +1,6 @@
 ---
-- hosts: localhost
+- name: Dummy test
+  hosts: localhost
   remote_user: root
   roles:
-    - ansible-docker-keycloak
+    - ansible_docker_keycloak

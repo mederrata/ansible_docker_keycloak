@@ -38,5 +38,6 @@
     daemon_reload: true
 
 - name: Build keycloak image
-  ansible.builtin.shell:
+  ansible.builtin.command:
     cmd: "{{ keycloak_install_directory }}/bin/build-keycloak"
+  changed_when: false
